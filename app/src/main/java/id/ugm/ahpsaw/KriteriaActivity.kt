@@ -10,9 +10,9 @@ class KriteriaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.kriteria)
         supportActionBar?.title ="Kriteria"
-        val btn_alternatif: Button = findViewById(R.id.button_alternatif) as Button
+        val btn_alternatif: Button = findViewById(R.id.button_subkriteria) as Button
         btn_alternatif.setOnClickListener {
-            val intent = Intent(this, AlternatifActivity::class.java)
+            val intent = Intent(this, SubKriteriaActivity::class.java)
             startActivity(intent)
         }
     }

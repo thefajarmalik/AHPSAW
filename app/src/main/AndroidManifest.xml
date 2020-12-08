@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AlternatifActivity">
+        </activity>
+        <activity android:name=".SubKriteriaActivity">
 
         </activity>
     </application>

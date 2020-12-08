@@ -4,4 +4,8 @@
         <item>Kabupaten Semarang</item>
         <item>Isi Manual</item>
     </string-array>
+    <string-array name="kriteria">
+        <item>Meteorologis</item>
+        <item>Geografis</item>
+    </string-array>
 </resources>

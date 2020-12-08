@@ -6,6 +6,29 @@
     android:padding="10dp">
 
     <LinearLayout
+        android:id="@+id/linear_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kriteria: ">
+
+        </TextView>
+
+        <Spinner
+            android:id="@+id/spinner_subkriteria"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:spinnerMode="dialog"></Spinner>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/rel_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,8 +38,8 @@
             android:id="@+id/linearlayout_CR_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/text_CR"
@@ -34,10 +57,12 @@
 
             </TextView>
         </LinearLayout>
+
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"></View>
+
         <Button
             android:id="@+id/button_CR"
             android:layout_width="wrap_content"
@@ -54,13 +79,13 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <Button
-        android:id="@+id/button_subkriteria"
+        android:id="@+id/button_alternatif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/list_kriteria"
         android:layout_alignParentBottom="true"
         android:layout_weight="0"
-        android:text="SUBKRITERIA">
+        android:text="Alternatif">
 
     </Button>
 
