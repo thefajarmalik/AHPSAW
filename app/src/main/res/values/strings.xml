@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AHPSAW</string>
+    <string-array name="sumber_data">
+        <item>Kabupaten Semarang</item>
+        <item>Isi Manual</item>
+    </string-array>
+</resources>
