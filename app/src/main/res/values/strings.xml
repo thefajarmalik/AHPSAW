@@ -1,5 +1,29 @@
 <resources>
     <string name="app_name">AHPSAW</string>
+
+    //KRITERIA SUBKRITERIA LABEL
+    <string name="CR">Consistency Ratio : </string>
+    <string name="kriteria">Kriteria : </string>
+    <string name="sumber_data">Sumber data: </string>
+    <string name="cek_konsistensi">Cek Konsistensi</string>
+    <string name="subkriteria_btn">Subkriteria</string>
+    <string name="alternatif_btn">Alternatif</string>
+
+    //ALTERNATIF LABEL
+    <string name="positif">Positif : </string>
+    <string name="kepadatan">Kepadatan : </string>
+    <string name="longitude">Longitude : </string>
+    <string name="latitude">Latitude : </string>
+    <string name="ketinggian">Ketinggian : </string>
+    <string name="panjang_jalan">Panjang Jalan : </string>
+    <string name="suhu">Suhu : </string>
+    <string name="kecepatan_angin">Kecepatan Angin : </string>
+    <string name="kelembaban">Kelembaban : </string>
+    <string name="presipitasi">Presipitasi : </string>
+    <string name="tekanan_udara">Tekanan udara : </string>
+    <string name="button_edit">Ubah</string>
+    <string name="button_hapus">Hapus</string>
+
     <string-array name="sumber_data">
         <item>Kabupaten Semarang</item>
         <item>Isi Manual</item>

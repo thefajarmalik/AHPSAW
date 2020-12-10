@@ -9,16 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AHPSAW">
-        <activity android:name=".KriteriaActivity">
+        <activity android:name=".activity.KriteriaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlternatifActivity">
+        <activity android:name=".activity.AlternatifActivity">
         </activity>
-        <activity android:name=".SubKriteriaActivity">
+        <activity android:name=".activity.SubKriteriaActivity">
 
         </activity>
     </application>

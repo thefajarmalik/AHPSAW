@@ -1,9 +1,10 @@
-package id.ugm.ahpsaw
+package id.ugm.ahpsaw.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import id.ugm.ahpsaw.R
 
 class KriteriaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

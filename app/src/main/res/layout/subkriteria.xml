@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kriteria: ">
+            android:text="@string/kriteria">
 
         </TextView>
 
@@ -45,7 +45,8 @@
                 android:id="@+id/text_CR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Consistency Ratio: ">
+                android:layout_marginEnd="@dimen/textview_margin"
+                android:text="@string/CR">
 
             </TextView>
 
@@ -67,7 +68,7 @@
             android:id="@+id/button_CR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cek Konsistensi"></Button>
+            android:text="@string/cek_konsistensi"></Button>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -82,10 +83,9 @@
         android:id="@+id/button_alternatif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/list_kriteria"
-        android:layout_alignParentBottom="true"
         android:layout_weight="0"
-        android:text="Alternatif">
+        android:layout_margin="@dimen/button_margin"
+        android:text="@string/alternatif_btn">
 
     </Button>
 
