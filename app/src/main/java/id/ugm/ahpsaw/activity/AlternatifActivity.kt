@@ -1,5 +1,6 @@
 package id.ugm.ahpsaw.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -18,6 +19,11 @@ class AlternatifActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.alternatif)
         supportActionBar?.title ="Alternatif"
+        val btn_hasil : Button = findViewById(R.id.button_hasil) as Button
+        btn_hasil.setOnClickListener {
+            val intent = Intent(this, HasilActivity::class.java)
+            startActivity(intent)
+        }
 
         val sumber_data = resources.getStringArray(R.array.sumber_data)
         val spinner = findViewById<Spinner>(R.id.spinner_alternatif)

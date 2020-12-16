@@ -47,22 +47,40 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_kriteria"
+        android:id="@+id/recycler_kriteria"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/button_subkriteria"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:layout_margin="@dimen/button_margin"
-        android:text="@string/subkriteria_btn">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    </Button>
+        <Button
+            android:id="@+id/button_tambah_kriteria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_margin="@dimen/button_margin"
+            android:text="@string/tambah_kriteria_btn">
+
+        </Button>
+
+
+        <Button
+            android:id="@+id/button_subkriteria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_margin="@dimen/button_margin"
+            android:text="@string/subkriteria_btn">
+
+        </Button>
+    </LinearLayout>
 
 
 </LinearLayout>

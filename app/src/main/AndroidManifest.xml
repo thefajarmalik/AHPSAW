@@ -16,9 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AlternatifActivity">
-        </activity>
+        <activity android:name=".activity.AlternatifActivity"></activity>
         <activity android:name=".activity.SubKriteriaActivity">
+
+        </activity>
+        <activity android:name=".activity.HasilActivity">
 
         </activity>
     </application>

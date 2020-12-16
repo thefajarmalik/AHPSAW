@@ -72,22 +72,41 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_kriteria"
+        android:id="@+id/recycler_subkriteria"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/button_alternatif"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:layout_margin="@dimen/button_margin"
-        android:text="@string/alternatif_btn">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    </Button>
+        <Button
+            android:id="@+id/button_tambah_subkriteria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_margin="@dimen/button_margin"
+            android:text="@string/tambah_subkriteria_btn">
+
+        </Button>
+
+
+        <Button
+            android:id="@+id/button_alternatif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_margin="@dimen/button_margin"
+            android:text="@string/alternatif_btn">
+
+        </Button>
+    </LinearLayout>
 
 
 </LinearLayout>

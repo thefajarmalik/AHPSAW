@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_view"
+    android:id="@+id/cardview_item_alternatif"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
@@ -24,7 +24,7 @@
             android:background="@color/design_default_color_primary">
 
             <TextView
-                android:id="@+id/item_name"
+                android:id="@+id/item_name_hasil"
                 android:layout_width="wrap_content"
                 android:layout_height="30sp"
                 android:gravity="center_vertical"

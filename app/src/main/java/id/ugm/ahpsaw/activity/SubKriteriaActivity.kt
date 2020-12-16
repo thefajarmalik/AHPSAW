@@ -5,7 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import id.ugm.ahpsaw.R
+import id.ugm.ahpsaw.adapter.KriteriaAdapter
+import id.ugm.ahpsaw.adapter.SubkriteriaAdapter
+import id.ugm.ahpsaw.data.KriteriaData
+import id.ugm.ahpsaw.data.SubkriteriaData
 
 class SubKriteriaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +44,24 @@ class SubKriteriaActivity : AppCompatActivity() {
                     // write code to perform some action
                 }
             }
+        }
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_subkriteria)
+
+        var subkriteria = ArrayList<SubkriteriaData>()
+        subkriteria.add(SubkriteriaData("Subkriteria 1", "Subkriteria 2"))
+        subkriteria.add(SubkriteriaData("Subkriteria 1", "Subkriteria 3"))
+        subkriteria.add(SubkriteriaData("Subkriteria 1", "Subkriteria 4"))
+        subkriteria.add(SubkriteriaData("Subkriteria 2", "Subkriteria 3"))
+        subkriteria.add(SubkriteriaData("Subkriteria 2", "Subkriteria 4"))
+        subkriteria.add(SubkriteriaData("Subkriteria 3", "Subkriteria 4"))
+
+
+
+        //APPLY RECYCLER VIEW
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(this@SubKriteriaActivity)
+            adapter = SubkriteriaAdapter(subkriteria)
         }
     }
 

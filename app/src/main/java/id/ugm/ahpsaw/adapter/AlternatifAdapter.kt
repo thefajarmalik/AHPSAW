@@ -43,7 +43,7 @@ class AlternatifAdapter(private val list: ArrayList<AlternatifData>) :
         private var mTekananUdaraView: TextView? = null
 
         init {
-            mNameView = itemView.findViewById(R.id.item_name)
+            mNameView = itemView.findViewById(R.id.item_name_hasil)
             mPositifView = itemView.findViewById(R.id.item_positif)
             mKepadatanView = itemView.findViewById(R.id.item_kepadatan)
             mLongitudeView = itemView.findViewById(R.id.item_longitude)
