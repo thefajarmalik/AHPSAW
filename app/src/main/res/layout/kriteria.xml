@@ -6,6 +6,31 @@
     android:padding="10dp">
 
     <LinearLayout
+        android:id="@+id/linear_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/sumber_data">
+
+        </TextView>
+
+        <Spinner
+            android:id="@+id/spinner_sumber_data_kriteria"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:spinnerMode="dialog"></Spinner>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/rel_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,8 +40,8 @@
             android:id="@+id/linearlayout_CR_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/text_CR"
@@ -28,19 +53,21 @@
             </TextView>
 
             <TextView
-                android:id="@+id/CR_value"
+                android:id="@+id/CR_value_kriteria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0.00123612">
 
             </TextView>
         </LinearLayout>
+
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"></View>
+
         <Button
-            android:id="@+id/button_CR"
+            android:id="@+id/button_CR_kriteria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cek_konsistensi"></Button>
@@ -64,8 +91,8 @@
             android:id="@+id/button_tambah_kriteria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
             android:layout_margin="@dimen/button_margin"
+            android:layout_weight="0.5"
             android:text="@string/tambah_kriteria_btn">
 
         </Button>
@@ -75,8 +102,8 @@
             android:id="@+id/button_subkriteria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
             android:layout_margin="@dimen/button_margin"
+            android:layout_weight="0.5"
             android:text="@string/subkriteria_btn">
 
         </Button>

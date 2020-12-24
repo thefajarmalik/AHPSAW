@@ -1,31 +1,40 @@
 package id.ugm.ahpsaw.activity
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ugm.ahpsaw.R
-import id.ugm.ahpsaw.adapter.AlternatifAdapter
 import id.ugm.ahpsaw.adapter.HasilAdapter
-import id.ugm.ahpsaw.data.AlternatifData
 import id.ugm.ahpsaw.data.HasilData
+import org.nield.kotlinstatistics.multiKMeansCluster
 
 class HasilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.hasil)
         supportActionBar?.title ="Hasil"
-
+        var intent = intent
+        var hasil = intent.getSerializableExtra("hasil") as ArrayList<HasilData>
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_hasil)
+        val clusters = hasil.multiKMeansCluster(
+            k=4,
+            maxIterations = 10000,
+            trialCount = 50,
+            xSelector = {it.skor},
+            ySelector = {it.skor})
 
-        var hasil = ArrayList<HasilData>()
-        hasil.add(HasilData(1,"Ungaran Barat",0.932955341))
-        hasil.add(HasilData(2,"Ambarawa",0.563961547))
-        hasil.add(HasilData(4,"Suruh",0.541397218))
-        hasil.add(HasilData(3,"Bawen",0.331630184))
-        hasil.add(HasilData(5,"Getasan",0.258510557))
+        clusters.forEachIndexed{ index, item ->
+            Log.i("TEST CLUSTER", "CENTROID: $index")
+            item.points.forEach {
+                Log.i("TEST POINTS", "POINTS: $it")
+            }
+        }
+
+
+
+
 
         //APPLY RECYCLER VIEW
         recyclerView.apply {

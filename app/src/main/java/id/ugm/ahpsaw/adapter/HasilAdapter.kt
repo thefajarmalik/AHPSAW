@@ -40,9 +40,9 @@ class HasilAdapter(private val list: ArrayList<HasilData>) :
         }
 
         fun bind(hasil: HasilData) {
-            mRankView?.text = hasil.rank.toString()
+            mRankView?.text = (adapterPosition+1).toString()
             mNameView?.text = hasil.nama.toString()
-            mSkorView?.text = hasil.skor.toString()
+            mSkorView?.text = "%15f".format(hasil.skor)
 
         }
     }

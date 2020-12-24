@@ -1,9 +1,12 @@
 package id.ugm.ahpsaw.data;
 
-public class MatriksElemen {
+import java.io.Serializable;
+
+public class MatriksElemen implements Serializable {
     double[][] comparison;
     double[] weight;
     int n;
+    double weightOfParent;
     String[] nameOfCriteria;
 
 
@@ -12,9 +15,17 @@ public class MatriksElemen {
         this.nameOfCriteria = name;
         this.n = name.length;
         this.weight = new double[n];
+        this.weightOfParent = 1;
+    }
+    public MatriksElemen(double[][] comparison, String[] name, double weightOfParent) {
+        this.comparison = comparison;
+        this.nameOfCriteria = name;
+        this.n = name.length;
+        this.weight = new double[n];
+        this.weightOfParent = weightOfParent;
     }
 
-    public double[] calcWeight() {
+    private double[] calcWeight() {
         double[][] norm = new double[n][n];
         double[] sumColumn = new double[n];
         double[] sumRow = new double[n];
@@ -28,7 +39,6 @@ public class MatriksElemen {
                 sumColumn[j] += comparison[i][j];
             }
         }
-        //System.out.println(Arrays.toString(sumColumn));
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -57,6 +67,15 @@ public class MatriksElemen {
         return weight;
     }
 
+    public double[] calcAbsoluteWeight() {
+        double[] localWeight = calcWeight();
+        double[] absoluteWeight = new double[calcWeight().length];
+        for (int i=0; i<calcWeight().length; i++){
+            absoluteWeight[i] = localWeight[i]*weightOfParent;
+        }
+        return absoluteWeight;
+    }
+
     public double consistencyRatio() {
         double[] WSV = new double[n];
         double[] CV = new double[n];
@@ -72,14 +91,11 @@ public class MatriksElemen {
             for (int j = 0; j < n; j++) {
                 WSV[i] += comparison[i][j] * weight[j];
             }
-            System.out.println("WSV[" + i + "] " + WSV[i]);
         }
 
         //CALCULATE CV
         for (int i = 0; i < n; i++) {
             CV[i] = WSV[i] / weight[i];
-            System.out.println("CV[" + i + "] " + CV[i]);
-            System.out.println("");
         }
 
         //CALCULATE EIGENMAKS
@@ -88,15 +104,12 @@ public class MatriksElemen {
             sumCV += CV[i];
         }
         eigenMaks = sumCV / n;
-        System.out.println("eigenMaks=" + eigenMaks);
 
         //CALCULATE CI
         CI = (eigenMaks - n) / (n - 1);
-        System.out.println("CI=" + CI);
 
         //CALCULATE CR
         CR = CI / RC[n - 1];
-        System.out.println("CR=" + CR);
         return CR;
     }
 
@@ -107,16 +120,6 @@ public class MatriksElemen {
     public void setNameOfCriteria(String[] nameOfCriteria) {
         this.nameOfCriteria = nameOfCriteria;
     }
-
-
-    public double[] getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double[] weight) {
-        this.weight = weight;
-    }
-
 
     public double[][] getComparison() {
         return comparison;

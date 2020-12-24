@@ -6,7 +6,7 @@
     android:padding="10dp">
 
     <LinearLayout
-        android:id="@+id/linear_spinner"
+        android:id="@+id/linear_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
@@ -15,6 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/kriteria">
 
         </TextView>
@@ -23,6 +24,7 @@
             android:id="@+id/spinner_subkriteria"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:spinnerMode="dialog"></Spinner>
 
@@ -51,7 +53,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/CR_value"
+                android:id="@+id/CR_value_subkriteria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0.00123612">
@@ -65,7 +67,7 @@
             android:layout_weight="1"></View>
 
         <Button
-            android:id="@+id/button_CR"
+            android:id="@+id/button_CR_subkriteria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cek_konsistensi"></Button>

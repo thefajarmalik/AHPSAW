@@ -1,7 +1,8 @@
 package id.ugm.ahpsaw.data
 
-data class HasilData (
-    var rank: Int,
+import java.io.Serializable
+
+data class HasilData(
     var nama: String,
-    var skor: Double) {
+    var skor: Double): Serializable{
 }

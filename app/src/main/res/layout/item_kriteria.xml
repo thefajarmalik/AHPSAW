@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardview_item_kriteria"
     android:layout_width="match_parent"
@@ -18,45 +18,78 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/design_default_color_primary"
             android:weightSum="1">
 
             <TextView
                 android:id="@+id/item_kriteria_kiri"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="30sp"
+                android:layout_marginStart="@dimen/alternatif_title_padding"
+                android:gravity="center"
+                android:text="Kriteria 1"
+                android:textColor="@color/cardview_light_background">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30sp"
                 android:layout_marginStart="@dimen/textview_margin"
-                android:layout_weight="0.5"
-                android:gravity="start">
-                //android:text="Kriteria 1"
+                android:layout_marginEnd="@dimen/textview_margin"
+                android:gravity="center"
+                android:text="terhadap"
+                android:textColor="@color/cardview_light_background">
 
             </TextView>
 
             <TextView
                 android:id="@+id/item_kriteria_kanan"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30sp"
+                android:layout_marginStart="@dimen/textview_margin"
                 android:layout_marginEnd="@dimen/textview_margin"
-                android:layout_weight="0.5"
-                android:gravity="end">
-                //android:text="Kriteria 2">
+                android:gravity="center"
+                android:text="Kriteria 2"
+                android:textColor="@color/cardview_light_background">
 
             </TextView>
         </LinearLayout>
 
-        <SeekBar
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="17"
-            android:progress="9">
+            android:gravity="end"
+            android:orientation="horizontal">
 
-        </SeekBar>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/textview_margin"
+                android:text="Reciprocal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="9">
+            </TextView>
 
-        </TextView>
+            <Switch
+                android:id="@+id/switch_item_kriteria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/button_margin">
+
+            </Switch>
+
+            <EditText
+                android:id="@+id/edittext_item_kriteria"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/button_margin"
+                android:maxLength="1"
+                android:hint="9"
+                android:inputType="number"></EditText>
+
+        </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
