@@ -1,35 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_hasil_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#E6E6E6"
+    android:padding="3dp"
     android:weightSum="1">
 
     <TextView
         android:id="@+id/item_rank"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/textview_margin"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:text="19"></TextView>
+        android:text="19"
+        android:textColor="@color/design_default_color_primary_variant">
+
+    </TextView>
 
     <TextView
         android:id="@+id/item_name_hasil"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/textview_margin"
-        android:layout_weight="0.6"
-        android:gravity="start"
-        android:text="Kecamatan Ungaran Barat"></TextView>
+        android:layout_weight="0.25"
+        android:gravity="center"
+        android:text="Kecamatan Ungaran Barat"
+        android:textColor="@color/design_default_color_primary_variant"></TextView>
 
     <TextView
         android:id="@+id/item_skor"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/textview_margin"
         android:layout_weight="0.3"
-        android:text="0.932955341">
+        android:gravity="center_vertical"
+        android:text="0.932955341"
+        android:textColor="@color/design_default_color_primary_variant">
 
     </TextView>
+
+
+    <LinearLayout
+        android:id="@+id/item_hasil_background_zona"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.35"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_zona"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/textview_margin"
+            android:gravity="center"
+            android:text="Tidak Terdampak"
+            android:textColor="@color/design_default_color_primary_variant"
+            android:textStyle="bold">
+
+        </TextView>
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -4,5 +4,6 @@ import java.io.Serializable
 
 data class HasilData(
     var nama: String,
-    var skor: Double): Serializable{
+    var skor: Double,
+    var zona: Int): Serializable{
 }

@@ -30,6 +30,8 @@
                 android:textColor="@color/cardview_light_background"
                 android:layout_marginStart="@dimen/alternatif_title_padding"
                 android:gravity="center_vertical"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 android:text="Kecamatan Getasan">
 
             </TextView>

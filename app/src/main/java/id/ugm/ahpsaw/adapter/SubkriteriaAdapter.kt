@@ -3,10 +3,11 @@ package id.ugm.ahpsaw.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import id.ugm.ahpsaw.R
-import id.ugm.ahpsaw.data.KriteriaData
 import id.ugm.ahpsaw.data.SubkriteriaData
 
 class SubkriteriaAdapter(private val list: ArrayList<SubkriteriaData>) :
@@ -30,17 +31,22 @@ class SubkriteriaAdapter(private val list: ArrayList<SubkriteriaData>) :
     class SubkriteriaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var mNamaKiriView: TextView? = null
         private var mNamaKananView: TextView? = null
+        private var mReciprocalView: Switch? = null
+        private var mPreferensi: EditText? = null
 
 
         init {
             mNamaKiriView = itemView.findViewById(R.id.item_subkriteria_kiri)
             mNamaKananView = itemView.findViewById(R.id.item_subkriteria_kanan)
+            mReciprocalView = itemView.findViewById(R.id.item_subkriteria_switch)
+            mPreferensi = itemView.findViewById(R.id.item_subkriteria_edittext)
         }
 
-        fun bind(list: SubkriteriaData) {
-            mNamaKiriView?.text = list.namaSubkriteria_1.toString()
-            mNamaKananView?.text = list.namaSubkriteria_2.toString()
-
+        fun bind(subkriteria: SubkriteriaData) {
+            mNamaKiriView?.text = subkriteria.namaSubkriteria_1.toString()
+            mNamaKananView?.text = subkriteria.namaSubkriteria_2.toString()
+            mPreferensi?.setText(subkriteria.preferensi.toString())
+            mReciprocalView?.isChecked = subkriteria.reciprocal
         }
     }
 

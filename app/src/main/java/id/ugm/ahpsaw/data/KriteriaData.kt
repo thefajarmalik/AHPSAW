@@ -4,6 +4,6 @@ data class KriteriaData (
     var namaKriteria_1: String,
     var namaKriteria_2: String,
     var reciprocal: Boolean,
-    var preferensi: Int) {
+    var preferensi: Double) {
 
 }

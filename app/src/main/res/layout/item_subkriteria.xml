@@ -72,7 +72,7 @@
             </TextView>
 
             <Switch
-                android:id="@+id/switch_item_subkriteria"
+                android:id="@+id/item_subkriteria_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -81,7 +81,7 @@
             </Switch>
 
             <EditText
-                android:id="@+id/edittext_item_subkriteria"
+                android:id="@+id/item_subkriteria_edittext"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -70,7 +70,7 @@ class AlternatifActivity : AppCompatActivity() {
 //            Log.i("PERHITUNGAN SKOR: ","SKOR[$i]=" + skor[i])
         }
         for (i in 0..matriks.size - 1) {
-            hasilData.add(HasilData(alternatif.elementAt(i).nama,skor[i]))
+            hasilData.add(HasilData(alternatif.elementAt(i).nama,skor[i], 0))
         }
         hasilData.sortByDescending { it.skor }
         return hasilData
