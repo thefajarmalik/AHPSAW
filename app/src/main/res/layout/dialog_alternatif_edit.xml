@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/alternatif_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/button_margin">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:textStyle="bold"
+                android:text="Nama">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_nama"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="0.7"
+                android:hint="Masukkan nama alternatif"
+                android:inputType="text"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:textStyle="bold"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+
+                android:text="Positif">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_positif"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="1"
+                android:hint="Masukkan jumlah pasien positif"
+                android:inputType="number"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+
+                android:text="Kepadatan">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_kepadatan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="1"
+                android:hint="Masukkan kepadatan penduduk"
+                android:inputType="numberDecimal"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:text="Longitude">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_Longitude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="1"
+                android:hint="Masukkan longitude"
+                android:inputType="numberDecimal|numberSigned"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+
+                android:text="Latitude">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_latitude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="1"
+                android:hint="Masukkan latitude"
+                android:inputType="numberDecimal|numberSigned"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+
+                android:text="Ketinggian">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_ketinggian"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="1"
+                android:hint="Masukkan ketinggian"
+                android:inputType="numberDecimal"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+
+                android:text="Panjang Jalan">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_panjangjalan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="1"
+                android:hint="Masukkan panjang jalan"
+                android:inputType="numberDecimal"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+
+                android:text="Suhu">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_suhu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="1"
+                android:hint="Masukkan suhu"
+                android:inputType="numberDecimal"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+
+                android:text="Kecepatan Angin">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_kecepatanangin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="0.7"
+                android:hint="Masukkan kecepatan angin"
+                android:inputType="numberDecimal"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+
+                android:text="Kelembaban">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_kelembaban"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="1"
+                android:hint="Masukkan kelembaban"
+                android:inputType="numberDecimal"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:text="Presipitasi">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_presipitasi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="1"
+                android:hint="Masukkan presipitasi"
+                android:inputType="numberDecimal"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/textview_margin"
+            android:weightSum="1">
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:text="Tekanan Udara">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/alternatif_dialog_tekananudara"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/textview_margin"
+                android:layout_weight="1"
+                android:hint="Masukkan tekanan udara"
+                android:inputType="numberDecimal"
+                android:maxLines="1">
+
+            </EditText>
+        </LinearLayout>
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="@dimen/button_margin"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <Button-->
+<!--                android:id="@+id/alternatif_edit_dialog_batalbtn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="start"-->
+<!--                android:layout_marginStart="@dimen/button_margin"-->
+<!--                android:text="BATAL">-->
+
+<!--            </Button>-->
+
+<!--            <View-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_weight="1">-->
+
+<!--            </View>-->
+
+<!--            <Button-->
+
+<!--                android:id="@+id/alternatif_edit_dialog_simpanbtn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="end"-->
+<!--                android:layout_marginEnd="@dimen/button_margin"-->
+<!--                android:text="SIMPAN">-->
+
+<!--            </Button>-->
+
+<!--        </LinearLayout>-->
+
+    </LinearLayout>
+
+</ScrollView>

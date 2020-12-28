@@ -4,15 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ugm.ahpsaw.R
 import id.ugm.ahpsaw.adapter.AlternatifAdapter
+import id.ugm.ahpsaw.adapter.EmptyAdapter
 import id.ugm.ahpsaw.data.AlternatifData
 import id.ugm.ahpsaw.data.HasilData
-import java.io.Serializable
 
 
 class AlternatifActivity : AppCompatActivity() {
@@ -23,34 +24,78 @@ class AlternatifActivity : AppCompatActivity() {
         setContentView(R.layout.alternatif)
         supportActionBar?.title = "Alternatif"
         var intent = intent
-        var allweight = intent.getSerializableExtra("weight") as? DoubleArray
-//        Log.i("ALLWEIGHT ALTERNATIF", allweight?.size.toString())
+        val allweight = intent.getSerializableExtra("weight") as DoubleArray
 
         val btn_hasil: Button = findViewById(R.id.button_hasil) as Button
+        val btn_tambah: Button = findViewById(R.id.button_tambah_alternatif) as Button
         val sumber_data = arrayListOf("Kabupaten Semarang", "Isi Manual")
         val spinner = findViewById<Spinner>(R.id.spinner_alternatif)
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_alternatif)
-        var kab_semarang = ArrayList<AlternatifData>()
+        var alternatifList = ArrayList<AlternatifData>()
 
+        addAlternatifKabSmg(alternatifList)
         spinnerAdapter(spinner, sumber_data)
 
-        addAlternatifKabSmg(kab_semarang)
-
-
-        var matriks = normalizeAlternatif(kab_semarang)
-//        Log.i("MATRIX NORMALIZATION TEST", "matriks[0][0]: " + matriks[4][9])
-        var hasil: Serializable = calcHasil(matriks, kab_semarang, allweight!!)
-
-
         recyclerView.apply {
+            Log.i("ALTERNATIF ACTIVITY", "recyclerView.apply is called")
             layoutManager = LinearLayoutManager(this@AlternatifActivity)
-            adapter = AlternatifAdapter(kab_semarang)
+            adapter = AlternatifAdapter(alternatifList)
+            if (alternatifList.isNotEmpty())
+                adapter = AlternatifAdapter(alternatifList)
+            else
+                adapter = EmptyAdapter("Jumlah alternatif hanya 1 sehingga tidak perlu perbandingan.")
+
+        }
+
+        btn_tambah.setOnClickListener{
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_alternatif_edit, null)
+            //mDialogView.findViewById<Button>(R.id.alternatif_edit_dialog_simpanbtn).setText("TAMBAH")
+            val mAlertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(this)
+                .setView(mDialogView)
+                .setTitle("Tambah Alternatif")
+                .setNegativeButton("BATAL") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+                .setPositiveButton("TAMBAH"){dialog, id ->
+                    val alternatif = AlternatifData(
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_nama).text.toString(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_positif).text.toString().toDouble(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_kepadatan).text.toString().toDouble(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_suhu).text.toString().toDouble(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_kecepatanangin).text.toString().toDouble(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_kelembaban).text.toString().toDouble(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_presipitasi).text.toString().toDouble(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_tekananudara).text.toString().toDouble(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_Longitude).text.toString().toDouble(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_latitude).text.toString().toDouble(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_ketinggian).text.toString().toDouble(),
+                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_panjangjalan).text.toString().toDouble()
+                    )
+                    alternatifList.add(alternatif)
+                    recyclerView.adapter?.notifyItemInserted(alternatifList.lastIndex)
+                    recyclerView.adapter?.notifyItemRangeChanged(alternatifList.lastIndex, alternatifList.size)
+                }
+            val mAlertDialog = mAlertDialogBuilder.show()
+
         }
 
         btn_hasil.setOnClickListener {
-            val intent = Intent(this, HasilActivity::class.java)
-            intent.putExtra("hasil", hasil)
-            startActivity(intent)
+            if (alternatifList.size >= 4) {
+                val matriks = normalizeAlternatif(alternatifList)
+                matriks.forEachIndexed{i, item ->
+                    item.forEachIndexed{j, item2 ->
+                        Log.i("NORMALISASI MATRIKS: ", "matriks[$i][$j]=" + matriks[i][j])
+                    }
+                }
+                val hasil = calcHasil(matriks, alternatifList, allweight)
+                val intentNext = Intent(this, HasilActivity::class.java)
+                intentNext.putExtra("hasil", hasil)
+                startActivity(intentNext)
+            }
+            else {
+                toast("Cacah alternatif kurang dari jumlah cluster(4) !")
+            }
         }
     }
 
@@ -61,19 +106,22 @@ class AlternatifActivity : AppCompatActivity() {
     ): ArrayList<HasilData> {
         var skor: DoubleArray = DoubleArray(matriks.size)
         var hasilData = ArrayList<HasilData>()
-        for (i in 0..skor.size-1)
+        for (i in 0..skor.size - 1)
             skor[i] = 0.0
         for (i in 0..matriks.size - 1) {
-            for (j in 0..matriks[i].size-1) {
-                skor[i] += matriks[i][j]*(weight[j])
+            for (j in 0..matriks[i].size - 1) {
+                skor[i] += matriks[i][j] * (weight[j])
             }
-//            Log.i("PERHITUNGAN SKOR: ","SKOR[$i]=" + skor[i])
         }
         for (i in 0..matriks.size - 1) {
-            hasilData.add(HasilData(alternatif.elementAt(i).nama,skor[i], 0))
+            hasilData.add(HasilData(alternatif.elementAt(i).nama, skor[i], 0))
         }
         hasilData.sortByDescending { it.skor }
         return hasilData
+    }
+    private fun toast(s: String){
+        if (s.isNotEmpty())
+            Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
     }
 
     private fun normalizeAlternatif(alternatif: ArrayList<AlternatifData>): Array<DoubleArray> {
@@ -93,7 +141,7 @@ class AlternatifActivity : AppCompatActivity() {
         }
         for (i in 0..alternatif.size - 1) {
             for (j in 0..9) {
-                temp.set(i, DoubleArray(1){matriks[i][j]})
+                temp.set(i, DoubleArray(1) { matriks[i][j] })
             }
         }
 
@@ -102,10 +150,9 @@ class AlternatifActivity : AppCompatActivity() {
         var minIndices: Array<Int> = arrayOf(2, 4, 7, 8)
 
         var maxMin = DoubleArray(matriks[0].size)
-        for (i in 0..maxMin.size-1){
+        matriks.forEachIndexed{i, item ->
             maxMin[i] = matriks[0][i]
         }
-
         for (i in 0..alternatif.size - 1) {
             for (j in 0..9) {
                 if (maxIndices.contains(j)) {
@@ -165,6 +212,9 @@ class AlternatifActivity : AppCompatActivity() {
                     parent: AdapterView<*>,
                     view: View?, position: Int, id: Long
                 ) {
+                    if (position == 0){
+                        //DATA PREDEFINED
+                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -175,22 +225,6 @@ class AlternatifActivity : AppCompatActivity() {
     }
 
     private fun addAlternatifKabSmg(kab_semarang: ArrayList<AlternatifData>) {
-        kab_semarang.add(
-            AlternatifData(
-                "Getasan",
-                1.0,
-                787.0,
-                20.0,
-                11.0,
-                98.0,
-                17.0,
-                30.3,
-                1.0,
-                -7.376397,
-                1450.0,
-                175.6
-            )
-        )
         kab_semarang.add(
             AlternatifData(
                 "Suruh",
@@ -205,6 +239,22 @@ class AlternatifActivity : AppCompatActivity() {
                 -7.36729,
                 944.0,
                 211.0
+            )
+        )
+        kab_semarang.add(
+            AlternatifData(
+                "Getasan",
+                1.0,
+                787.0,
+                20.0,
+                11.0,
+                98.0,
+                17.0,
+                30.3,
+                1.0,
+                -7.376397,
+                1450.0,
+                175.6
             )
         )
         kab_semarang.add(

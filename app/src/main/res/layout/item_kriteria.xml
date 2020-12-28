@@ -71,14 +71,14 @@
 
             </TextView>
 
-            <Switch
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/item_kriteria_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/button_margin">
 
-            </Switch>
+            </androidx.appcompat.widget.SwitchCompat>
 
             <EditText
                 android:id="@+id/item_kriteria_edittext"
@@ -88,7 +88,11 @@
                 android:layout_margin="@dimen/button_margin"
                 android:maxLength="1"
                 android:hint="9"
-                android:inputType="number"></EditText>
+                android:digits="123456789"
+                android:inputType="number">
+
+            </EditText>
+
 
         </LinearLayout>
     </LinearLayout>

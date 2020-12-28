@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardview_item_alternatif"
     android:layout_width="match_parent"
@@ -18,6 +17,7 @@
 
 
         //ALTERNATIF NAME LAYOUT
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,12 +27,12 @@
                 android:id="@+id/item_name_hasil"
                 android:layout_width="wrap_content"
                 android:layout_height="30sp"
-                android:textColor="@color/cardview_light_background"
                 android:layout_marginStart="@dimen/alternatif_title_padding"
                 android:gravity="center_vertical"
+                android:text="Kecamatan Getasan"
+                android:textColor="@color/cardview_light_background"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:text="Kecamatan Getasan">
+                android:textStyle="bold">
 
             </TextView>
         </LinearLayout>
@@ -94,6 +94,127 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="750">
+
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/textview_margin"
+                        android:text="@string/suhu">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/item_suhu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="35">
+
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/textview_margin"
+                        android:text="@string/kecepatan_angin">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/item_kecepatan_angin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="11">
+
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/textview_margin"
+                        android:text="@string/kelembaban">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/item_kelembaban"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="98">
+
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/textview_margin"
+                        android:text="@string/presipitasi">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/item_presipitasi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="17">
+
+                    </TextView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            //RIGHT DATA LAYOUT
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/textview_margin"
+                        android:text="@string/tekanan_udara">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/item_tekanan_udara"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30,3">
 
                     </TextView>
                 </LinearLayout>
@@ -187,125 +308,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            //RIGHT DATA LAYOUT
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/textview_margin"
-                        android:text="@string/suhu">
-
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/item_suhu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="35">
-
-                    </TextView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/textview_margin"
-                        android:text="@string/kecepatan_angin">
-
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/item_kecepatan_angin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="11">
-
-                    </TextView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/textview_margin"
-                        android:text="@string/kelembaban">
-
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/item_kelembaban"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="98">
-
-                    </TextView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/textview_margin"
-                        android:text="@string/presipitasi">
-
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/item_presipitasi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="17">
-
-                    </TextView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/textview_margin"
-                        android:text="@string/tekanan_udara">
-
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/item_tekanan_udara"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="30,3">
-
-                    </TextView>
-                </LinearLayout>
-            </LinearLayout>
-
         </LinearLayout>
 
         //BUTTON LAYOUT
@@ -318,7 +320,7 @@
             android:weightSum="1">
 
             <Button
-                android:id="@+id/btn_edit"
+                android:id="@+id/item_alternatif_editbtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/button_margin"
@@ -328,7 +330,7 @@
             </Button>
 
             <Button
-                android:id="@+id/btn_hapus"
+                android:id="@+id/item_alternatif_deletebtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/button_margin"

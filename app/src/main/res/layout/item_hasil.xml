@@ -27,7 +27,9 @@
         android:layout_weight="0.25"
         android:gravity="center"
         android:text="Kecamatan Ungaran Barat"
-        android:textColor="@color/design_default_color_primary_variant"></TextView>
+        android:textColor="@color/design_default_color_primary_variant">
+
+    </TextView>
 
     <TextView
         android:id="@+id/item_skor"

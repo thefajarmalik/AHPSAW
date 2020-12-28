@@ -64,13 +64,17 @@
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"></View>
+            android:layout_weight="1">
+
+        </View>
 
         <Button
             android:id="@+id/button_CR_subkriteria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cek_konsistensi"></Button>
+            android:text="@string/cek_konsistensi">
+
+        </Button>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -88,15 +92,15 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <Button
-            android:id="@+id/button_tambah_subkriteria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:layout_margin="@dimen/button_margin"
-            android:text="@string/tambah_subkriteria_btn">
+<!--        <Button-->
+<!--            android:id="@+id/button_tambah_subkriteria"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="0.5"-->
+<!--            android:layout_margin="@dimen/button_margin"-->
+<!--            android:text="@string/tambah_subkriteria_btn">-->
 
-        </Button>
+<!--        </Button>-->
 
 
         <Button

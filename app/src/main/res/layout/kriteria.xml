@@ -5,30 +5,30 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <LinearLayout
-        android:id="@+id/linear_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linear_top"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="0"-->
+<!--        android:orientation="horizontal">-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/sumber_data">
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:text="@string/sumber_data">-->
 
-        </TextView>
+<!--        </TextView>-->
 
-        <Spinner
-            android:id="@+id/spinner_sumber_data_kriteria"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:spinnerMode="dialog"></Spinner>
+<!--        <Spinner-->
+<!--            android:id="@+id/spinner_sumber_data_kriteria"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="1"-->
+<!--            android:spinnerMode="dialog"></Spinner>-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/rel_top"
@@ -87,15 +87,15 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <Button
-            android:id="@+id/button_tambah_kriteria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/button_margin"
-            android:layout_weight="0.5"
-            android:text="@string/tambah_kriteria_btn">
+<!--        <Button-->
+<!--            android:id="@+id/button_tambah_kriteria"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="@dimen/button_margin"-->
+<!--            android:layout_weight="0.5"-->
+<!--            android:text="@string/tambah_kriteria_btn">-->
 
-        </Button>
+<!--        </Button>-->
 
 
         <Button
