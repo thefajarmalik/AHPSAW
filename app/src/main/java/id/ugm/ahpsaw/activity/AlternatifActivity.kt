@@ -1,31 +1,40 @@
 package id.ugm.ahpsaw.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.okhttp.Callback
+import com.squareup.okhttp.OkHttpClient
+import com.squareup.okhttp.Request
+import com.squareup.okhttp.Response
 import id.ugm.ahpsaw.R
 import id.ugm.ahpsaw.adapter.AlternatifAdapter
 import id.ugm.ahpsaw.adapter.EmptyAdapter
 import id.ugm.ahpsaw.data.AlternatifData
 import id.ugm.ahpsaw.data.HasilData
+import org.json.JSONObject
+import java.io.IOException
+import java.util.concurrent.CountDownLatch
 
 
-class AlternatifActivity : AppCompatActivity() {
+class AlternatifActivity : AppCompatActivity()  {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.alternatif)
         supportActionBar?.title = "Alternatif"
+
+        val API_KEY: String = "2853cc1670b449099df210719201610"
         var intent = intent
         val allweight = intent.getSerializableExtra("weight") as DoubleArray
-
         val btn_hasil: Button = findViewById(R.id.button_hasil) as Button
         val btn_tambah: Button = findViewById(R.id.button_tambah_alternatif) as Button
         val sumber_data = arrayListOf("Kabupaten Semarang", "Isi Manual")
@@ -33,19 +42,53 @@ class AlternatifActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_alternatif)
         var alternatifList = ArrayList<AlternatifData>()
 
-        addAlternatifKabSmg(alternatifList)
+        val client = OkHttpClient()
+
+        //run(, client)
+
+        var test_db = ArrayList<AlternatifData>()
+        val db = FirebaseFirestore.getInstance()
+        val collectionReference = db.collection("alternatif")
+        collectionReference
+            .get()
+            .addOnSuccessListener { result ->
+                toast("Database berhasil dimuat")
+                for (document in result){
+                    val data = document.toObject(AlternatifData::class.java)
+                    test_db.add(
+                        AlternatifData(
+                        data.nama,
+                        data.positif,
+                        data.kepadatan,
+                        data.suhu,
+                        data.kecepatanAngin,
+                        data.kelembaban,
+                        data.presipitasi,
+                        data.tekananUdara,
+                        data.longitude,
+                        data.latitude,
+                        data.ketinggian,
+                        data.panjangJalan
+                    )
+                    )
+                }
+                alternatifList = test_db.clone() as ArrayList<AlternatifData>
+                alternatifList.forEachIndexed{i, item ->
+                    updateAlternatifFromAPI(client, API_KEY, item)
+                    Log.i("alternatifList [$i]: ", item.toString())
+                }
+                updateRecyclerView(recyclerView, alternatifList)
+            }
+            .addOnFailureListener { e ->
+                toast("Database gagal dimuat")
+            }
+
+
+        //addAlternatifKabSmg(alternatifList)
+        //alternatifList = test_db.clone() as ArrayList<AlternatifData>
         spinnerAdapter(spinner, sumber_data)
+        //updateRecyclerView(recyclerView, alternatifList)
 
-        recyclerView.apply {
-            Log.i("ALTERNATIF ACTIVITY", "recyclerView.apply is called")
-            layoutManager = LinearLayoutManager(this@AlternatifActivity)
-            adapter = AlternatifAdapter(alternatifList)
-            if (alternatifList.isNotEmpty())
-                adapter = AlternatifAdapter(alternatifList)
-            else
-                adapter = EmptyAdapter("Jumlah alternatif hanya 1 sehingga tidak perlu perbandingan.")
-
-        }
 
         btn_tambah.setOnClickListener{
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_alternatif_edit, null)
@@ -54,7 +97,6 @@ class AlternatifActivity : AppCompatActivity() {
                 .setView(mDialogView)
                 .setTitle("Tambah Alternatif")
                 .setNegativeButton("BATAL") { dialog, id ->
-                    // Dismiss the dialog
                     dialog.dismiss()
                 }
                 .setPositiveButton("TAMBAH"){dialog, id ->
@@ -83,11 +125,6 @@ class AlternatifActivity : AppCompatActivity() {
         btn_hasil.setOnClickListener {
             if (alternatifList.size >= 4) {
                 val matriks = normalizeAlternatif(alternatifList)
-                matriks.forEachIndexed{i, item ->
-                    item.forEachIndexed{j, item2 ->
-                        Log.i("NORMALISASI MATRIKS: ", "matriks[$i][$j]=" + matriks[i][j])
-                    }
-                }
                 val hasil = calcHasil(matriks, alternatifList, allweight)
                 val intentNext = Intent(this, HasilActivity::class.java)
                 intentNext.putExtra("hasil", hasil)
@@ -98,27 +135,65 @@ class AlternatifActivity : AppCompatActivity() {
             }
         }
     }
+    fun updateRecyclerView(recyclerView: RecyclerView, alternatifList: ArrayList<AlternatifData>){
+        recyclerView.apply {
+            Log.i("ALTERNATIF ACTIVITY", "recyclerView.apply is called")
+            layoutManager = LinearLayoutManager(this@AlternatifActivity)
+            adapter = AlternatifAdapter(alternatifList)
+            if (alternatifList.isNotEmpty())
+                adapter = AlternatifAdapter(alternatifList)
+            else
+                adapter = EmptyAdapter("Jumlah alternatif hanya 1 sehingga tidak perlu perbandingan.")
 
-    private fun calcHasil(
-        matriks: Array<DoubleArray>,
-        alternatif: ArrayList<AlternatifData>,
-        weight: DoubleArray
-    ): ArrayList<HasilData> {
+        }
+    }
+
+    fun updateAlternatifFromAPI(client: OkHttpClient, API_KEY: String, alternatif: AlternatifData){
+        val url = "http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${alternatif.latitude},${alternatif.longitude}"
+        val request = Request.Builder()
+            .url(url)
+            .build()
+        val call = client.newCall(request)
+        val countDownLatch = CountDownLatch(1)
+        call.enqueue(object : com.squareup.okhttp.Callback{
+            override fun onResponse(response: Response?) {
+                val jsonData: String? = response?.body()?.string()
+                val jsonObject: JSONObject = JSONObject(jsonData)
+                alternatif.suhu = jsonObject.getJSONObject("current").getDouble("temp_c")
+                alternatif.kecepatanAngin = jsonObject.getJSONObject("current").getDouble("wind_kph")
+                alternatif.kelembaban = jsonObject.getJSONObject("current").getDouble("humidity")
+                alternatif.presipitasi = jsonObject.getJSONObject("current").getDouble("precip_mm")
+                alternatif.tekananUdara = jsonObject.getJSONObject("current").getDouble("pressure_in")
+                Log.i("API RUN", "alternatifData=${alternatif}")
+                countDownLatch.countDown()
+            }
+
+            override fun onFailure(request: Request?, e: IOException?) {
+                toast("Request API gagal")
+                Log.i("API RUN", "onFailure")
+                countDownLatch.countDown()
+            }
+        })
+        countDownLatch.await()
+    }
+
+    private fun calcHasil(matriks: Array<DoubleArray>, alternatif: ArrayList<AlternatifData>, weight: DoubleArray): ArrayList<HasilData> {
         var skor: DoubleArray = DoubleArray(matriks.size)
         var hasilData = ArrayList<HasilData>()
-        for (i in 0..skor.size - 1)
+        for (i in skor.indices)
             skor[i] = 0.0
-        for (i in 0..matriks.size - 1) {
-            for (j in 0..matriks[i].size - 1) {
+        for (i in matriks.indices) {
+            for (j in matriks.indices) {
                 skor[i] += matriks[i][j] * (weight[j])
             }
         }
-        for (i in 0..matriks.size - 1) {
+        for (i in matriks.indices) {
             hasilData.add(HasilData(alternatif.elementAt(i).nama, skor[i], 0))
         }
         hasilData.sortByDescending { it.skor }
         return hasilData
     }
+
     private fun toast(s: String){
         if (s.isNotEmpty())
             Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
@@ -169,28 +244,12 @@ class AlternatifActivity : AppCompatActivity() {
         }
 
 
-//        for (i in 0..alternatif.size - 1) {
-//            for (j in 0..9) {
-//                Log.i("After finding maxMin matriks[$i][$j]=", matriks[i][j].toString())
-//            }
-//        }
-
         for (i in 0..alternatif.size - 1) {
             for (j in 0..9) {
                 if (maxIndices.contains(j)) {
-//                    Log.i(
-//                        "Pembagian matriks[$i][$j]: ",
-//                        matriks[i][j].toString() + " DIBAGI " + maxMin[j].toString()
-//                    )
                     matriks[i][j] = matriks[i][j] / maxMin[j]
-//                    Log.i("matriks[$i][$j]=", matriks[i][j].toString())
                 } else if (minIndices.contains(j)) {
-//                    Log.i(
-//                        "Pembagian matriks[$i][$j]: ",
-//                        maxMin[j].toString() + " DIBAGI " + matriks[i][j].toString()
-//                    )
                     matriks[i][j] = maxMin[j] / matriks[i][j]
-//                    Log.i("Matriks[$i][$j]=", matriks[i][j].toString())
                 }
             }
         }
@@ -224,8 +283,8 @@ class AlternatifActivity : AppCompatActivity() {
         }
     }
 
-    private fun addAlternatifKabSmg(kab_semarang: ArrayList<AlternatifData>) {
-        kab_semarang.add(
+    private fun addAlternatifKabSmg(alternatifList: ArrayList<AlternatifData>) {
+        alternatifList.add(
             AlternatifData(
                 "Suruh",
                 14.0,
@@ -241,7 +300,7 @@ class AlternatifActivity : AppCompatActivity() {
                 211.0
             )
         )
-        kab_semarang.add(
+        alternatifList.add(
             AlternatifData(
                 "Getasan",
                 1.0,
@@ -257,7 +316,7 @@ class AlternatifActivity : AppCompatActivity() {
                 175.6
             )
         )
-        kab_semarang.add(
+        alternatifList.add(
             AlternatifData(
                 "Ungaran Barat",
                 95.0,
@@ -273,7 +332,7 @@ class AlternatifActivity : AppCompatActivity() {
                 153.0
             )
         )
-        kab_semarang.add(
+        alternatifList.add(
             AlternatifData(
                 "Bawen",
                 54.0,
@@ -289,7 +348,7 @@ class AlternatifActivity : AppCompatActivity() {
                 44.2
             )
         )
-        kab_semarang.add(
+        alternatifList.add(
             AlternatifData(
                 "Ambarawa",
                 29.0,

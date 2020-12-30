@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "503928775657",
+    "firebase_url": "https://ahpsaw-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "ahpsaw",
+    "storage_bucket": "ahpsaw.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503928775657:android:a612e372c28fed5b6e6178",
+        "android_client_info": {
+          "package_name": "id.ugm.ahpsaw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503928775657-c86rurti0kn5u8qbn6a06hrq0bcd2sue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxfG_G4szqFbjG-8-5dj4W7vRY1Q2XiKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503928775657-c86rurti0kn5u8qbn6a06hrq0bcd2sue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

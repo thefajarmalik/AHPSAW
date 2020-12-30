@@ -117,11 +117,7 @@ class MatriksElemen : Serializable {
         }
 
         //CALCULATE EIGENMAKS
-        var sumCV = 0.0
-        for (i in 0 until n) {
-            sumCV += CV[i]
-        }
-        eigenMaks = sumCV / n
+        eigenMaks = CV.sum()/ n
 
         //CALCULATE CI
         CI = (eigenMaks - n) / (n - 1)

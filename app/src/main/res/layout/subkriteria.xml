@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textStyle="bold"
             android:text="@string/kriteria">
 
         </TextView>
@@ -48,6 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/textview_margin"
+                android:textStyle="bold"
                 android:text="@string/CR">
 
             </TextView>
@@ -56,6 +58,7 @@
                 android:id="@+id/CR_value_subkriteria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="0.00123612">
 
             </TextView>
@@ -91,17 +94,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="1">
-
-<!--        <Button-->
-<!--            android:id="@+id/button_tambah_subkriteria"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="0.5"-->
-<!--            android:layout_margin="@dimen/button_margin"-->
-<!--            android:text="@string/tambah_subkriteria_btn">-->
-
-<!--        </Button>-->
-
 
         <Button
             android:id="@+id/button_alternatif"

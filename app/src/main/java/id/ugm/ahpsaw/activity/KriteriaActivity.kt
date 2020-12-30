@@ -4,11 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.ugm.ahpsaw.R
 import id.ugm.ahpsaw.adapter.KriteriaAdapter
+import id.ugm.ahpsaw.data.AlternatifData
 import id.ugm.ahpsaw.data.KriteriaData
 import id.ugm.ahpsaw.data.MatriksElemen
 
@@ -32,7 +34,7 @@ class KriteriaActivity : AppCompatActivity() {
         addMatrixKriteria(matrix)
 
 
-        var KRITERIA: MatriksElemen
+        var KRITERIA: MatriksElemen 
         kriteria = fillKriteriaList(namaKriteria, matrix)
         updateRecyclerView(recyclerView, kriteria)
 
@@ -49,13 +51,32 @@ class KriteriaActivity : AppCompatActivity() {
         }
 
         btn_subkriteria.setOnClickListener {
-            val intent = Intent(this, SubKriteriaActivity::class.java)
             KRITERIA = createMatrixFromUpdatedList(kriteria, namaKriteria)
-            kriteria.forEachIndexed { i, item ->
-                Log.i("kriteria on SUBKRITERIA CLICK", "Kriteria[$i]=" + item)
+            val cr = KRITERIA.consistencyRatio()
+            if (cr > 0.1){
+                val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+                builder.setMessage("Consistency Ratio melebihi 0,1.")
+                    .setTitle("Apakah Anda yakin untuk melanjutkan?")
+                    .setCancelable(true)
+                    .setPositiveButton("Ya") { dialog, id ->
+                        val intent = Intent(this, SubKriteriaActivity::class.java)
+                        KRITERIA = createMatrixFromUpdatedList(kriteria, namaKriteria)
+                        intent.putExtra("MatriksElemen", KRITERIA)
+                        startActivity(intent)
+                    }
+                    .setNegativeButton("Tidak") { dialog, id ->
+                        // Dismiss the dialog
+                        dialog.dismiss()
+                    }
+                val alert = builder.create()
+                alert.show()
             }
-            intent.putExtra("MatriksElemen", KRITERIA)
-            startActivity(intent)
+            else {
+                val intent = Intent(this, SubKriteriaActivity::class.java)
+                KRITERIA = createMatrixFromUpdatedList(kriteria, namaKriteria)
+                intent.putExtra("MatriksElemen", KRITERIA)
+                startActivity(intent)
+            }
         }
 
     }

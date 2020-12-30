@@ -220,14 +220,32 @@ class SubKriteriaActivity : AppCompatActivity() {
             val intentNext = Intent(this, AlternatifActivity::class.java)
             SUBKRITERIA_GEOGRAFIS = createMatrixFromUpdatedList(subkriteriaGeo, namaSubkriteriaGeografis, parentWeightGeografis, 3)
             SUBKRITERIA_METEOROLOGIS = createMatrixFromUpdatedList(subkriteriaMeteo, namaSubkriteriaMeteorologis, parentWeightMeteorologis, 2)
-            allWeight[2] = SUBKRITERIA_METEOROLOGIS.calcAbsoluteWeight()
-            allWeight[3] = SUBKRITERIA_GEOGRAFIS.calcAbsoluteWeight()
-            w = buildWeight(allWeight)
-            w.forEachIndexed { i, item ->
-                Log.i("BTN_ALTERNATIF IS TOUCHED, ALLWEIGHT W[$i]= ", item.toString())
+            if (SUBKRITERIA_GEOGRAFIS.consistencyRatio() > 0.1 || SUBKRITERIA_METEOROLOGIS.consistencyRatio() > 0.1){
+                val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+                builder.setMessage("Consistency Ratio melebihi 0,1.")
+                    .setTitle("Apakah Anda yakin untuk melanjutkan?")
+                    .setCancelable(true)
+                    .setPositiveButton("Ya") { dialog, id ->
+                        allWeight[2] = SUBKRITERIA_METEOROLOGIS.calcAbsoluteWeight()
+                        allWeight[3] = SUBKRITERIA_GEOGRAFIS.calcAbsoluteWeight()
+                        w = buildWeight(allWeight)
+                        intentNext.putExtra("weight", w)
+                        startActivity(intentNext)
+                    }
+                    .setNegativeButton("Tidak") { dialog, id ->
+                        // Dismiss the dialog
+                        dialog.dismiss()
+                    }
+                val alert = builder.create()
+                alert.show()
             }
-            intentNext.putExtra("weight", w)
-            startActivity(intentNext)
+            else {
+                allWeight[2] = SUBKRITERIA_METEOROLOGIS.calcAbsoluteWeight()
+                allWeight[3] = SUBKRITERIA_GEOGRAFIS.calcAbsoluteWeight()
+                w = buildWeight(allWeight)
+                intentNext.putExtra("weight", w)
+                startActivity(intentNext)
+            }
         }
 
 

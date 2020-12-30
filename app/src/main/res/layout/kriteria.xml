@@ -5,31 +5,6 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/linear_top"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_weight="0"-->
-<!--        android:orientation="horizontal">-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="@string/sumber_data">-->
-
-<!--        </TextView>-->
-
-<!--        <Spinner-->
-<!--            android:id="@+id/spinner_sumber_data_kriteria"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_weight="1"-->
-<!--            android:spinnerMode="dialog"></Spinner>-->
-
-<!--    </LinearLayout>-->
-
     <LinearLayout
         android:id="@+id/rel_top"
         android:layout_width="match_parent"
@@ -46,6 +21,7 @@
             <TextView
                 android:id="@+id/text_CR"
                 android:layout_width="wrap_content"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/textview_margin"
                 android:text="@string/CR">
@@ -55,6 +31,7 @@
             <TextView
                 android:id="@+id/CR_value_kriteria"
                 android:layout_width="wrap_content"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="0.00123612">
 

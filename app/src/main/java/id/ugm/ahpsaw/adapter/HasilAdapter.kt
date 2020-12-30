@@ -59,7 +59,7 @@ class HasilAdapter(private val list: ArrayList<HasilData>) :
                 }
                 2 -> {
                     mZonaView?.text = "Rendah"
-                    mZonaBackgroundView?.setBackgroundColor(Color.YELLOW)
+                    mZonaBackgroundView?.setBackgroundColor(Color.parseColor("#FFEA00"))
                 }
                 3 -> {
                     mZonaView?.text = "Tidak Terdampak"

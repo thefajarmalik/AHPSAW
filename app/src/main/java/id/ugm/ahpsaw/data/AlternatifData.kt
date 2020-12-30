@@ -13,4 +13,6 @@ data class AlternatifData (
     var latitude: Double,
     var ketinggian: Double,
     var panjangJalan: Double) {
+
+    constructor(): this("", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 }
