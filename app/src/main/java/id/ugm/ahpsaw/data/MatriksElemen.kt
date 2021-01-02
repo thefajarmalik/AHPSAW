@@ -1,5 +1,6 @@
 package id.ugm.ahpsaw.data
 
+import android.util.Log
 import java.io.Serializable
 
 class MatriksElemen : Serializable {
@@ -15,6 +16,12 @@ class MatriksElemen : Serializable {
         n = name.size
         weight = DoubleArray(n)
         weightOfParent = 1.0
+        comparison.forEachIndexed{i, item ->
+            item.forEachIndexed{j, item2 ->
+                Log.i("MatriksElemen Construction(no parent weight): ", "matriks[$i][$j]=${comparison[i][j]}")
+            }
+        }
+
     }
 
     constructor(
@@ -27,6 +34,11 @@ class MatriksElemen : Serializable {
         n = name.size
         weight = DoubleArray(n)
         this.weightOfParent = weightOfParent
+        comparison.forEachIndexed{i, item ->
+            item.forEachIndexed{j, item2 ->
+                Log.i("MatriksElemen Construction(WITH PARENT WEIGHT): ", "matriks[$i][$j]=${comparison[i][j]}")
+            }
+        }
     }
 
     private fun calcWeight(): DoubleArray {
@@ -72,8 +84,9 @@ class MatriksElemen : Serializable {
     fun calcAbsoluteWeight(): DoubleArray {
         val localWeight = calcWeight()
         val absoluteWeight = DoubleArray(calcWeight().size)
-        for (i in calcWeight().indices) {
+        for (i in 0 until n) {
             absoluteWeight[i] = localWeight[i] * weightOfParent
+            Log.i("calcAbsoluteWeight(): ", "absoluteWeight[$i]=${localWeight[i]} * ${weightOfParent} = ${absoluteWeight[i]}")
         }
         return absoluteWeight
     }

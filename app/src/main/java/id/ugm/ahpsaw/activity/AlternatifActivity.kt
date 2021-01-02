@@ -1,5 +1,6 @@
 package id.ugm.ahpsaw.activity
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,7 @@ import id.ugm.ahpsaw.data.HasilData
 import org.json.JSONObject
 import java.io.IOException
 import java.util.concurrent.CountDownLatch
+import kotlin.math.absoluteValue
 
 
 class AlternatifActivity : AppCompatActivity()  {
@@ -35,6 +37,9 @@ class AlternatifActivity : AppCompatActivity()  {
         val API_KEY: String = "2853cc1670b449099df210719201610"
         var intent = intent
         val allweight = intent.getSerializableExtra("weight") as DoubleArray
+        allweight.forEachIndexed { i, item ->
+            Log.i("WEIGHT[$i]=", item.toString())
+        }
         val btn_hasil: Button = findViewById(R.id.button_hasil) as Button
         val btn_tambah: Button = findViewById(R.id.button_tambah_alternatif) as Button
         val sumber_data = arrayListOf("Kabupaten Semarang", "Isi Manual")
@@ -44,15 +49,16 @@ class AlternatifActivity : AppCompatActivity()  {
 
         val client = OkHttpClient()
 
-        //run(, client)
-
         var test_db = ArrayList<AlternatifData>()
         val db = FirebaseFirestore.getInstance()
         val collectionReference = db.collection("alternatif")
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Mengunduh data...")
+        progressDialog.setMessage("Sedang mengunduh data dari database & API. Mohon menunggu.")
+        progressDialog.show()
         collectionReference
             .get()
             .addOnSuccessListener { result ->
-                toast("Database berhasil dimuat")
                 for (document in result){
                     val data = document.toObject(AlternatifData::class.java)
                     test_db.add(
@@ -78,16 +84,19 @@ class AlternatifActivity : AppCompatActivity()  {
                     Log.i("alternatifList [$i]: ", item.toString())
                 }
                 updateRecyclerView(recyclerView, alternatifList)
+                toast("Database berhasil dimuat")
+                progressDialog.dismiss()
             }
             .addOnFailureListener { e ->
                 toast("Database gagal dimuat")
+                progressDialog.dismiss()
             }
 
 
         //addAlternatifKabSmg(alternatifList)
         //alternatifList = test_db.clone() as ArrayList<AlternatifData>
         spinnerAdapter(spinner, sumber_data)
-        //updateRecyclerView(recyclerView, alternatifList)
+        updateRecyclerView(recyclerView, alternatifList)
 
 
         btn_tambah.setOnClickListener{
@@ -109,7 +118,8 @@ class AlternatifActivity : AppCompatActivity()  {
                         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_kelembaban).text.toString().toDouble(),
                         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_presipitasi).text.toString().toDouble(),
                         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_tekananudara).text.toString().toDouble(),
-                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_Longitude).text.toString().toDouble(),
+                        1.0,
+//                        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_Longitude).text.toString().toDouble(),
                         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_latitude).text.toString().toDouble(),
                         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_ketinggian).text.toString().toDouble(),
                         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_panjangjalan).text.toString().toDouble()
@@ -183,8 +193,10 @@ class AlternatifActivity : AppCompatActivity()  {
         for (i in skor.indices)
             skor[i] = 0.0
         for (i in matriks.indices) {
-            for (j in matriks.indices) {
+            for (j in 0 until matriks[0].size) {
+                var s = skor[i]
                 skor[i] += matriks[i][j] * (weight[j])
+                Log.i("calcHasil[$i]: ", "${s} += ${matriks[i][j]} +* ${weight[j]} = ${skor[i]}")
             }
         }
         for (i in matriks.indices) {
@@ -210,7 +222,7 @@ class AlternatifActivity : AppCompatActivity()  {
             matriks[i][4] = alternatif.elementAt(i).kelembaban
             matriks[i][5] = alternatif.elementAt(i).presipitasi
             matriks[i][6] = alternatif.elementAt(i).tekananUdara
-            matriks[i][7] = alternatif.elementAt(i).latitude
+            matriks[i][7] = alternatif.elementAt(i).latitude.absoluteValue
             matriks[i][8] = alternatif.elementAt(i).ketinggian
             matriks[i][9] = alternatif.elementAt(i).panjangJalan
         }
@@ -221,11 +233,11 @@ class AlternatifActivity : AppCompatActivity()  {
         }
 
 
-        var maxIndices: Array<Int> = arrayOf(0, 1, 3, 5, 6, 9)
-        var minIndices: Array<Int> = arrayOf(2, 4, 7, 8)
+        var maxIndices: Array<Int> = arrayOf(0, 1, 3, 5, 6, 7, 9)
+        var minIndices: Array<Int> = arrayOf(2, 4, 8)
 
         var maxMin = DoubleArray(matriks[0].size)
-        matriks.forEachIndexed{i, item ->
+        matriks[0].forEachIndexed{i, item ->
             maxMin[i] = matriks[0][i]
         }
         for (i in 0..alternatif.size - 1) {
@@ -248,8 +260,10 @@ class AlternatifActivity : AppCompatActivity()  {
             for (j in 0..9) {
                 if (maxIndices.contains(j)) {
                     matriks[i][j] = matriks[i][j] / maxMin[j]
+                    Log.i("normalizeAlternatif(max)= ", "matriks[$i][$j]= ${matriks[i][j]}")
                 } else if (minIndices.contains(j)) {
                     matriks[i][j] = maxMin[j] / matriks[i][j]
+                    Log.i("normalizeAlternatif(min)= ", "matriks[$i][$j]= ${matriks[i][j]}")
                 }
             }
         }
@@ -286,22 +300,6 @@ class AlternatifActivity : AppCompatActivity()  {
     private fun addAlternatifKabSmg(alternatifList: ArrayList<AlternatifData>) {
         alternatifList.add(
             AlternatifData(
-                "Suruh",
-                14.0,
-                944.0,
-                31.0,
-                7.0,
-                98.0,
-                20.0,
-                31.0,
-                1.0,
-                -7.36729,
-                944.0,
-                211.0
-            )
-        )
-        alternatifList.add(
-            AlternatifData(
                 "Getasan",
                 1.0,
                 787.0,
@@ -316,6 +314,23 @@ class AlternatifActivity : AppCompatActivity()  {
                 175.6
             )
         )
+        alternatifList.add(
+            AlternatifData(
+                "Suruh",
+                14.0,
+                944.0,
+                31.0,
+                7.0,
+                98.0,
+                20.0,
+                31.0,
+                1.0,
+                -7.36729,
+                944.0,
+                211.0
+            )
+        )
+
         alternatifList.add(
             AlternatifData(
                 "Ungaran Barat",

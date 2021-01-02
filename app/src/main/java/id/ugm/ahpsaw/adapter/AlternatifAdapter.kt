@@ -36,12 +36,12 @@ class AlternatifAdapter(private val list: ArrayList<AlternatifData>) :
         val mDialogView = LayoutInflater.from(holder.itemView.context).inflate(R.layout.dialog_alternatif_edit, null)
         val mAlertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(holder.itemView.context)
             .setView(mDialogView)
-            .setTitle("Edit Alternatif")
+            .setTitle("Ubah Alternatif")
             .setNegativeButton("BATAL") { dialog, id ->
                 // Dismiss the dialog
                 dialog.dismiss()
             }
-            .setPositiveButton("SIMPAN"){dialog, id ->
+            .setPositiveButton("UBAH"){dialog, id ->
                 var a = ArrayList<Boolean>()
                 a.add(mDialogView.findViewById<EditText>(R.id.alternatif_dialog_nama).text.toString().isEmpty())
                 a.add(mDialogView.findViewById<EditText>(R.id.alternatif_dialog_positif).text.toString().isEmpty())
@@ -51,7 +51,7 @@ class AlternatifAdapter(private val list: ArrayList<AlternatifData>) :
                 a.add(mDialogView.findViewById<EditText>(R.id.alternatif_dialog_kelembaban).text.toString().isEmpty())
                 a.add(mDialogView.findViewById<EditText>(R.id.alternatif_dialog_presipitasi).text.toString().isEmpty())
                 a.add(mDialogView.findViewById<EditText>(R.id.alternatif_dialog_tekananudara).text.toString().isEmpty())
-                a.add(mDialogView.findViewById<EditText>(R.id.alternatif_dialog_Longitude).text.toString().isEmpty())
+//                a.add(mDialogView.findViewById<EditText>(R.id.alternatif_dialog_Longitude).text.toString().isEmpty())
                 a.add(mDialogView.findViewById<EditText>(R.id.alternatif_dialog_latitude).text.toString().isEmpty())
                 a.add(mDialogView.findViewById<EditText>(R.id.alternatif_dialog_ketinggian).text.toString().isEmpty())
                 a.add(mDialogView.findViewById<EditText>(R.id.alternatif_dialog_panjangjalan).text.toString().isEmpty())
@@ -65,7 +65,8 @@ class AlternatifAdapter(private val list: ArrayList<AlternatifData>) :
                     mDialogView.findViewById<EditText>(R.id.alternatif_dialog_kelembaban).text.toString().toDouble(),
                     mDialogView.findViewById<EditText>(R.id.alternatif_dialog_presipitasi).text.toString().toDouble(),
                     mDialogView.findViewById<EditText>(R.id.alternatif_dialog_tekananudara).text.toString().toDouble(),
-                    mDialogView.findViewById<EditText>(R.id.alternatif_dialog_Longitude).text.toString().toDouble(),
+                    list[holder.adapterPosition].longitude,
+//                    mDialogView.findViewById<EditText>(R.id.alternatif_dialog_Longitude).text.toString().toDouble(),
                     mDialogView.findViewById<EditText>(R.id.alternatif_dialog_latitude).text.toString().toDouble(),
                     mDialogView.findViewById<EditText>(R.id.alternatif_dialog_ketinggian).text.toString().toDouble(),
                     mDialogView.findViewById<EditText>(R.id.alternatif_dialog_panjangjalan).text.toString().toDouble()
@@ -85,7 +86,7 @@ class AlternatifAdapter(private val list: ArrayList<AlternatifData>) :
         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_nama).setText(list[pos].nama)
         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_positif).setText(list[pos].positif.toInt().toString(), TextView.BufferType.EDITABLE)
         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_kepadatan).setText(list[pos].kepadatan.toString(), TextView.BufferType.EDITABLE)
-        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_Longitude).setText(list[pos].longitude.toString(), TextView.BufferType.EDITABLE)
+//        mDialogView.findViewById<EditText>(R.id.alternatif_dialog_Longitude).setText(list[pos].longitude.toString(), TextView.BufferType.EDITABLE)
         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_latitude).setText(list[pos].latitude.toString(), TextView.BufferType.EDITABLE)
         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_ketinggian).setText(list[pos].ketinggian.toString(), TextView.BufferType.EDITABLE)
         mDialogView.findViewById<EditText>(R.id.alternatif_dialog_panjangjalan).setText(list[pos].panjangJalan.toString(), TextView.BufferType.EDITABLE)
@@ -127,7 +128,7 @@ class AlternatifAdapter(private val list: ArrayList<AlternatifData>) :
         var mNameView: TextView? = null
         private var mPositifView: TextView? = null
         private var mKepadatanView: TextView? = null
-        private var mLongitudeView: TextView? = null
+//        private var mLongitudeView: TextView? = null
         private var mLatitudeView: TextView? = null
         private var mKetinggianView: TextView? = null
         private var mPanjangJalanView: TextView? = null
@@ -144,7 +145,7 @@ class AlternatifAdapter(private val list: ArrayList<AlternatifData>) :
             mNameView = itemView.findViewById(R.id.item_name_hasil)
             mPositifView = itemView.findViewById(R.id.item_positif)
             mKepadatanView = itemView.findViewById(R.id.item_kepadatan)
-            mLongitudeView = itemView.findViewById(R.id.item_longitude)
+//            mLongitudeView = itemView.findViewById(R.id.item_longitude)
             mLatitudeView = itemView.findViewById(R.id.item_latitude)
             mKetinggianView = itemView.findViewById(R.id.item_ketinggian)
             mPanjangJalanView = itemView.findViewById(R.id.item_panjang_jalan)
@@ -161,7 +162,7 @@ class AlternatifAdapter(private val list: ArrayList<AlternatifData>) :
             mNameView?.text = alternatif.nama
             mPositifView?.text = alternatif.positif.toInt().toString()
             mKepadatanView?.text = alternatif.kepadatan.toString()
-            mLongitudeView?.text = alternatif.longitude.toString()
+//            mLongitudeView?.text = alternatif.longitude.toString()
             mLatitudeView?.text = alternatif.latitude.toString()
             mKetinggianView?.text = alternatif.ketinggian.toString()
             mPanjangJalanView?.text = alternatif.panjangJalan.toString()

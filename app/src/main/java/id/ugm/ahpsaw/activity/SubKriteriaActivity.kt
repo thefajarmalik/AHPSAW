@@ -36,6 +36,7 @@ class SubKriteriaActivity : AppCompatActivity() {
         val parentWeightDemografis = KRITERIA.calcAbsoluteWeight()[1]
         val parentWeightMeteorologis = KRITERIA.calcAbsoluteWeight()[2]
         val parentWeightGeografis = KRITERIA.calcAbsoluteWeight()[3]
+        Log.i("CEK PARENT WEIGHT: ", "parentWeightGeo=${parentWeightGeografis}")
 
 
         val namaSubkriteriaGeografis: Array<String> =
@@ -67,6 +68,9 @@ class SubKriteriaActivity : AppCompatActivity() {
 
         SUBKRITERIA_METEOROLOGIS = MatriksElemen(matriksMeteorologis, namaSubkriteriaMeteorologis, parentWeightMeteorologis)
         SUBKRITERIA_GEOGRAFIS = MatriksElemen(matriksGeografis, namaSubkriteriaGeografis, parentWeightGeografis)
+        SUBKRITERIA_GEOGRAFIS.calcAbsoluteWeight().forEachIndexed{i, item ->
+            Log.i("CEK CALCULATE ABSOLUTE WEIGHT:", "weightGeo[$i]=${item}")
+        }
 
         var allWeight = ArrayList<DoubleArray>()
         allWeight.add(DoubleArray(1){parentWeightMedis})
